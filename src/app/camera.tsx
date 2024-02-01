@@ -1,9 +1,13 @@
-import { useEffect, useRef } from "react";
+import { Button } from "@mui/material";
+import { Dispatch, SetStateAction, useCallback, useEffect, useRef } from "react";
 import Webcam from "react-webcam";
 
+interface props {
+  setDatosImagen: (datos:string) => void
+}
 
-const App = () => {
-  const webcam = useRef<Webcam>(null);
+const App = ({setDatosImagen}:props) => {
+  const webcam = (useRef<Webcam>(null)) as any;
 
   
 
@@ -28,6 +32,16 @@ const App = () => {
     };
   };
 
+  const capture = useCallback(
+    () => {
+      const imageSrc = webcam.current.getScreenshot();
+      setDatosImagen(imageSrc)
+      console.log(imageSrc)
+    },
+    [webcam],
+  )
+  
+
   
 
   return (
@@ -38,6 +52,7 @@ const App = () => {
       <Webcam
         audio={false}
         ref={webcam}
+        screenshotFormat="image/jpeg"
         style={{
           position: "absolute",
           margin: "auto",
@@ -45,8 +60,14 @@ const App = () => {
           top: 100,
           left: 0,
           right: 0,
-        }}
+        
+        }}width={300}
+        height={300}
+        
       />
+      <Button onClick={capture}>
+        Capturar
+      </Button>
     </div>
   );
 }

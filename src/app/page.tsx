@@ -11,6 +11,7 @@ export default function Home() {
 
   const [abrirCamara, setabrirCamara] = useState(false)
   const [sistemaOperativo, setsistemaOperativo] = useState('')
+  const [datosImagen, setdatosImagen] = useState('')
 
   const detectarSistemaOperativo = () => {
     setsistemaOperativo(platform.os?.family?.toLowerCase() as string)
@@ -27,8 +28,11 @@ export default function Home() {
         <Button onClick={()=>setabrirCamara(!abrirCamara)}>
           abrir camara {sistemaOperativo}
         </Button>
+        <Button onClick={()=>setdatosImagen('')}>
+          limpiar camara
+        </Button>
         {abrirCamara && 
-          <Camera/>
+          <Camera setDatosImagen={setdatosImagen}/>
         }
         <p>
           Get started by edit&nbsp;
@@ -114,6 +118,9 @@ export default function Home() {
             Instantly deploy your Next.js site to a shareable URL with Vercel.
           </p>
         </a>
+        {datosImagen !== '' &&
+         <img src={datosImagen} alt='capturada'/>
+        }
       </div>
     </main>
   )
