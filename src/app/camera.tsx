@@ -45,23 +45,24 @@ const App = ({setDatosImagen}:props) => {
   
 
   return (
-    <div className="App">
-      <header className="header">
+    <div >
+      <header >
         <div className="title">face mask App</div>
       </header>
       <Webcam
         audio={false}
         ref={webcam}
         screenshotFormat="image/jpeg"
-        style={{
-          position: "absolute",
-          margin: "auto",
-          textAlign: "center",
-          top: 100,
-          left: 0,
-          right: 0,
+        // style={{
+        //   position: "absolute",
+        //   margin: "auto",
+        //   textAlign: "center",
+        //   top: 100,
+        //   left: 0,
+        //   right: 0,
         
-        }}width={300}
+        // }}
+        width={300}
         height={300}
         
       />
