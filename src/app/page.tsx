@@ -2,18 +2,30 @@
 import Image from 'next/image'
 import styles from './page.module.css'
 import Camera from './camera'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Button } from '@mui/material'
+import  platform  from 'platform'
 
 
 export default function Home() {
 
   const [abrirCamara, setabrirCamara] = useState(false)
+  const [sistemaOperativo, setsistemaOperativo] = useState('')
+
+  const detectarSistemaOperativo = () => {
+    setsistemaOperativo(platform.os?.family?.toLowerCase() as string)
+  }
+
+  useEffect(() => {
+    detectarSistemaOperativo()
+  }, [])
+  
+
   return (
     <main className={styles.main}>
       <div className={styles.description}>
         <Button onClick={()=>setabrirCamara(!abrirCamara)}>
-          abrir camara
+          abrir camara {sistemaOperativo}
         </Button>
         {abrirCamara && 
           <Camera/>
