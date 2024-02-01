@@ -2,13 +2,22 @@
 import Image from 'next/image'
 import styles from './page.module.css'
 import Camera from './camera'
+import { useState } from 'react'
+import { Button } from '@mui/material'
 
 
 export default function Home() {
+
+  const [abrirCamara, setabrirCamara] = useState(false)
   return (
     <main className={styles.main}>
       <div className={styles.description}>
-        <Camera/>
+        <Button onClick={()=>setabrirCamara(!abrirCamara)}>
+          abrir camara
+        </Button>
+        {abrirCamara && 
+          <Camera/>
+        }
         <p>
           Get started by edit&nbsp;
           <code className={styles.code}>src/app/page.tsx</code>

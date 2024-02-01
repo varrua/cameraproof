@@ -9,11 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@tensorflow-models/face-landmarks-detection": "^1.0.5",
-    "@tensorflow/tfjs": "^4.15.0",
-    "@tensorflow/tfjs-backend-webgl": "^4.15.0",
-    "@tensorflow/tfjs-converter": "^4.15.0",
-    "@tensorflow/tfjs-core": "^4.15.0",
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.15.7",
     "@types/react-webcam": "^3.0.0",
     "next": "14.0.4",
     "react": "^18",
