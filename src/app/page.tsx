@@ -1,10 +1,14 @@
+'use client'
 import Image from 'next/image'
 import styles from './page.module.css'
+import Camera from './camera'
+
 
 export default function Home() {
   return (
     <main className={styles.main}>
       <div className={styles.description}>
+        <Camera/>
         <p>
           Get started by edit&nbsp;
           <code className={styles.code}>src/app/page.tsx</code>
@@ -47,7 +51,7 @@ export default function Home() {
           rel="noopener noreferrer"
         >
           <h2>
-            Docs <span>-&gt;</span>
+            Documentos varios dos <span>-&gt;</span>
           </h2>
           <p>Find in-depth information about Next.js features and API.</p>
         </a>
