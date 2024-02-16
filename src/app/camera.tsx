@@ -70,9 +70,11 @@ const App = ({setDatosImagen}:props) => {
       <Webcam
         audio={false}
         ref={webcam}
-        screenshotFormat="image/jpeg"
+        screenshotFormat="image/webp"
         videoConstraints={{
-           facingMode: 'environment'
+           facingMode: 'environment',
+          
+          
         }}
         // style={{
         //   position: "absolute",
