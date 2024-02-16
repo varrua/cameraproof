@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import { Dispatch, SetStateAction, useCallback, useEffect, useRef, useState } from "react";
 import Webcam from "react-webcam";
-import { createWorker } from "tesseract.js";
+import { OEM, createWorker } from "tesseract.js";
 
 interface props {
   setDatosImagen: (datos:string) => void
@@ -38,8 +38,7 @@ const App = ({setDatosImagen}:props) => {
   async function detectText(image:any) {
     // Crear un trabajador de tesseract.js
     //const worker =  await createWorker();
-    const worker = await createWorker('spa')
-  
+    const worker = await createWorker('spa',1)
 
     const { data: { text } } = await worker.recognize(image);
     await worker.terminate();
