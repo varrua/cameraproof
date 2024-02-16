@@ -1,6 +1,7 @@
 import { Button } from "@mui/material";
-import { Dispatch, SetStateAction, useCallback, useEffect, useRef } from "react";
+import { Dispatch, SetStateAction, useCallback, useEffect, useRef, useState } from "react";
 import Webcam from "react-webcam";
+import { createWorker } from "tesseract.js";
 
 interface props {
   setDatosImagen: (datos:string) => void
@@ -8,6 +9,8 @@ interface props {
 
 const App = ({setDatosImagen}:props) => {
   const webcam = (useRef<Webcam>(null)) as any;
+
+  const [texto, settexto] = useState('')
 
   
 
@@ -32,10 +35,26 @@ const App = ({setDatosImagen}:props) => {
     };
   };
 
+  async function detectText(image:any) {
+    // Crear un trabajador de tesseract.js
+    //const worker =  await createWorker();
+    const worker = await createWorker('spa')
+  
+
+    const { data: { text } } = await worker.recognize(image);
+    await worker.terminate();
+    settexto(text)
+    console.log('texto',text)
+  
+    // Devolver el texto reconocido
+    return text;
+  }
+
   const capture = useCallback(
     () => {
       const imageSrc = webcam.current.getScreenshot();
       setDatosImagen(imageSrc)
+      detectText(imageSrc)
       console.log(imageSrc)
     },
     [webcam],
@@ -69,6 +88,7 @@ const App = ({setDatosImagen}:props) => {
         height={300}
         
       />
+      <p>{texto}</p>
       <Button onClick={capture}>
         Capturar
       </Button>
