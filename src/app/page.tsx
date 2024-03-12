@@ -11,7 +11,7 @@ import Webcam from "react-webcam";
 
 
 
-export async function detectText(image:any) {
+async function detectText(image:any) {
     // Crear un trabajador de tesseract.js
     //const worker =  await createWorker();
     const worker = await createWorker('eng')
