@@ -5,9 +5,10 @@ import { OEM, createWorker } from "tesseract.js";
 
 interface props {
   setDatosImagen: (datos:string) => void
+  imagen: string
 }
 
-const App = ({setDatosImagen}:props) => {
+const App = ({setDatosImagen,imagen}:props) => {
   const webcam = (useRef<Webcam>(null)) as any;
 
   const [texto, settexto] = useState('')
@@ -38,8 +39,7 @@ const App = ({setDatosImagen}:props) => {
   async function detectText(image:any) {
     // Crear un trabajador de tesseract.js
     //const worker =  await createWorker();
-    const worker = await createWorker('spa',1)
-
+    const worker = await createWorker('spa')
     const { data: { text } } = await worker.recognize(image);
     await worker.terminate();
     settexto(text)
@@ -62,6 +62,8 @@ const App = ({setDatosImagen}:props) => {
 
   
 
+  
+
   return (
     <div >
       <header >
@@ -71,13 +73,16 @@ const App = ({setDatosImagen}:props) => {
         audio={false}
         ref={webcam}
         screenshotQuality={1}
-        imageSmoothing={false}
+        imageSmoothing={false} 
         screenshotFormat="image/jpeg"
         videoConstraints={{
            facingMode: 'environment',
-          
-          
+
+          width: 1280,
+          height:720
+           
         }}
+        
         // style={{
         //   position: "absolute",
         //   margin: "auto",
@@ -91,6 +96,7 @@ const App = ({setDatosImagen}:props) => {
         height={300}
         
       />
+      
       <p>{texto}</p>
       <Button onClick={capture}>
         Capturar
